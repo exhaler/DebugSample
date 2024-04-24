@@ -10,10 +10,11 @@ export async function httpTrigger1(
   context: InvocationContext
 ): Promise<HttpResponseInit> {
   context.log(`Http function processed request for url "${request.url}"`);
+  const token = request.headers.get("authorization");
 
-  const name = request.query.get("name") || (await request.text()) || "world";
+  // const name = request.query.get("name") || (await request.text()) || "world";
 
-  return { body: `Hello 12, ${name}!` };
+  return { body: `token, ${token}` };
 }
 
 app.http("httpTrigger1", {
